@@ -4,7 +4,15 @@ export default {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'login': "url('./src/assets/login.png')",
+        'signup': "url('./src/assets/signup.png')",
+      },
+      height: {
+        '128': '38rem',
+      }
+    },
   },
   plugins: [],
 }
