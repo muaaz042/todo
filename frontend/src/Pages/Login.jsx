@@ -17,7 +17,7 @@ const Login = () => {
     const res = await axios.post('http://localhost:5000/auth/login', { email, password }, config);
     console.log(res.data.token);
     localStorage.setItem('token',res.data.token);
-    navigate("/");
+    navigate("/home");
     setEmail('');
     setPassword('');
   };
