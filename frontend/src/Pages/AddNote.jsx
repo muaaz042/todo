@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { GiNotebook } from "react-icons/gi";
 import { FaArrowLeft } from "react-icons/fa";
@@ -10,11 +10,14 @@ const AddNote = () => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
 
-    const token = localStorage.getItem('token');
-    if (!token) {
-        navigate('/login');
-        return;
-    }
+
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            navigate('/login');
+        }
+    }, []);
 
 
     const handleAdd = async (e) => {

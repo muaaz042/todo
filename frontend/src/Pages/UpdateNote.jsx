@@ -13,12 +13,12 @@ const UpdateNote = () => {
     const [description, setDescription] = useState('');
     const token = localStorage.getItem('token');
 
-    if (!token) {
-        navigate('/login');
-        return;
-    }
-
     useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            navigate('/login');
+            return;
+        }
         if (note) {
             setTitle(note.title);
             setDescription(note.description);

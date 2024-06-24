@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import { FaRegUser } from "react-icons/fa";
 import { MdOutlineEmail, MdLock } from "react-icons/md";
 import axios from 'axios';
@@ -12,12 +12,6 @@ const Signup = () => {
     password: "",
     error: null
   });
-
-  const token = localStorage.getItem('token');
-  if (!token) {
-    navigate('/login');
-    return;
-  }
 
   const { name, email, password, error } = data;
 
@@ -119,6 +113,7 @@ const Signup = () => {
               onClick={handleRegister}
               className="text-center font-medium border-blue-400 text-blue-400 cursor-pointer hover:bg-blue-400 hover:text-white outline-none border-2 w-full p-2 rounded-md">Signup</button>
           </div>
+          <p className='text-black'>Already have an account <Link className='text-blue-400 underline' to='/login'>Log In</Link></p>
         </form>
       </div>
     </div>

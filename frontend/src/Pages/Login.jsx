@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { MdOutlineEmail, MdLock } from "react-icons/md";
-import { useNavigate } from 'react-router-dom';
+import {Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 
@@ -100,7 +100,9 @@ const Login = () => {
               onClick={handleLogin}
               className="text-center font-medium border-blue-400 text-blue-400 cursor-pointer hover:bg-blue-400 hover:text-white outline-none border-2 w-full p-2 rounded-md">Login</button>
           </div>
+          <p className='text-black'>Don't have an account <Link className='text-blue-400 underline' to='/signup'>register</Link></p>
         </form>
+        
       </div>
     </div>
   )

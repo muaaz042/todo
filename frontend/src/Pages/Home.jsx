@@ -8,13 +8,15 @@ const Home = () => {
   const [notes, setNotes] = useState([]);
   const navigate = useNavigate();
 
-  const token = localStorage.getItem('token');
-  if (!token) {
-    navigate('/login');
-    return;
-  }
+
 
   useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/login');
+      return;
+    }
+    
     const fetchNotes = async () => {
       try {
         const res = await axios.get('http://localhost:5000/note/getNotes', {
@@ -50,14 +52,14 @@ const Home = () => {
 
   return (
     <div>
-      <div className={`${getRandomColor()} w-full h-52 flex justify-center items-center gap-8 mb-10 shadow-lg`}>
-        <p className='text-2xl'>click on <strong>+</strong> button to add note</p>
-        <div className='rounded-full border-4 w-20 h-20 border-blue-300 hover:bg-blue-300 flex justify-center items-center'>
+      <div className={`${getRandomColor()} w-full h-52 px-4 flex justify-center items-center gap-8 relative mb-10 shadow-lg`}>
+        <p className='text-4xl '>click on <strong>+</strong> button to add note</p>
+        <div className='rounded-full border-4 w-20 h-20 bg-blue-300 border-black hover:bg-green-300 flex justify-center items-center absolute -bottom-10'>
           <IoAddSharp
             onClick={() => {
               navigate('/addNote');
             }}
-            className='text-4xl m-3' />
+            className='text-5xl m-3' />
         </div>
       </div>
       <div className='flex flex-wrap justify-evenly items-center px-10 py-8 gap-x-1 gap-y-5'>

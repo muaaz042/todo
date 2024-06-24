@@ -52,7 +52,7 @@ const Navbar = () => {
       {user ? (
         <section className='md:flex justify-center items-center gap-4 drop-shadow-xl hidden'>
           <p>Welcome, <span className='font-bold font-mono'>{user.name}</span></p>
-          <Link to="/updateProfile" className='hover:text-blue-400'>Update Profile</Link>
+          <Link to="/updateProfile" className='hover:text-blue-400 underline'>Update Profile</Link>
           <button
             onClick={logOut}
             className="text-center font-medium border-blue-400 text-blue-400 cursor-pointer hover:bg-blue-400 hover:text-white outline-none border-2 self-center w-20 p-2 rounded-md">Log out</button>
@@ -86,7 +86,7 @@ const Navbar = () => {
               onClick={() => {
                 setMenu(false);
               }}
-              className='hover:text-blue-400'>Update Profile</Link>
+              className='hover:text-blue-400 underline'>Update Profile</Link>
             <button
               onClick={logOut}
               className="text-center font-medium border-blue-400 text-blue-400 cursor-pointer hover:bg-blue-400 hover:text-white outline-none border-2 self-center w-20 p-2 rounded-md">Log out</button>
