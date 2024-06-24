@@ -1,12 +1,19 @@
 import React, { useState } from 'react'
 import { MdOutlineEmail, MdLock } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import axios from 'axios';
 
 const Login = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+    error: null
+  });
+
+  const { email, password, error } = data;
+
 
   const config = {
     headers: { "Content-Type": "application/json" }
@@ -14,12 +21,33 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const res = await axios.post('http://localhost:5000/auth/login', { email, password }, config);
-    console.log(res.data.token);
-    localStorage.setItem('token',res.data.token);
-    navigate("/home");
-    setEmail('');
-    setPassword('');
+    if (!email) {
+      setData({ ...data, error: "Email is required" });
+      return
+    }
+    if (!password) {
+      setData({ ...data, error: "Password is required" });
+      return
+    }
+    if (password.length < 5 || password.length > 8) {
+      setData({ ...data, error: "Password must be 5 - 8 characters" });
+      return
+    }
+    try {
+      setData({ ...data, error: null });
+      const res = await axios.post('http://localhost:5000/auth/login', { email, password }, config);
+      console.log(res.data.token);
+      localStorage.setItem('token', res.data.token);
+      navigate("/home");
+      setData({ ...data, email: '', password: '' });
+    } catch (err) {
+      setData({ ...data, error: err.response.data.error });
+    }
+
+  };
+
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
   };
 
   return (
@@ -37,12 +65,12 @@ const Login = () => {
         </div>
 
         <form className="px-16">
+          {error ? <p className=' text-red-500'>{error}</p> : null}
           <div className="relative my-3">
             <input
               type="email"
-              required
               name='email'
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={handleChange}
               className='outline-blue-800 border-2 text-black font-mono focus:border-background w-full p-2 rounded-md'
               placeholder="Email"
             />
@@ -54,11 +82,10 @@ const Login = () => {
           <div className="relative my-3">
             <input
               type="password"
-              required
               minLength={5}
               maxLength={8}
               name='password'
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={handleChange}
               className='outline-blue-800 border-2 text-black font-mono focus:border-background w-full p-2 rounded-md'
               placeholder="Password"
             />

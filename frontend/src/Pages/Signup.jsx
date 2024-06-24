@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaRegUser } from "react-icons/fa";
 import { MdOutlineEmail, MdLock } from "react-icons/md";
@@ -6,17 +6,55 @@ import axios from 'axios';
 
 const Signup = () => {
   const navigate = useNavigate();
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    error: null
+  });
+
+  const token = localStorage.getItem('token');
+  if (!token) {
+    navigate('/login');
+    return;
+  }
+
+  const { name, email, password, error } = data;
+
+  const config = {
+    headers: { "Content-Type": "application/json" }
+  };
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    await axios.post('http://localhost:5000/auth/register', { name, email, password });
-    navigate("/login");
-    setName('');
-    setEmail('');
-    setPassword('');
+    if (!name) {
+      setData({ ...data, error: "Name is required" });
+      return
+    }
+    if (!email) {
+      setData({ ...data, error: "Email is required" });
+      return
+    }
+    if (!password) {
+      setData({ ...data, error: "Password is required" });
+      return
+    }
+    if (password.length < 5 || password.length > 8) {
+      setData({ ...data, error: "Password must be 5 - 8 characters" });
+      return
+    }
+    try {
+      setData({ ...data, error: null });
+      await axios.post("http://localhost:5000/auth/register", { name, email, password }, config);
+      navigate('/login');
+      setData({ ...data, name: '', email: '', password: '' });
+    } catch (err) {
+      setData({ ...data, error: err.response.data.error });
+    }
+  };
+
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
   };
 
   return (
@@ -34,12 +72,12 @@ const Signup = () => {
         </div>
 
         <form className="px-16">
+          {error ? <p className=' text-red-500'>{error}</p> : null}
           <div className="relative my-3">
             <input
               type="text"
-              required
               name='name'
-              onChange={(e) => setName(e.target.value)}
+              onChange={handleChange}
               className='outline-blue-800 border-2 text-black font-mono focus:border-background w-full p-2 rounded-md'
               placeholder="Full name"
             />
@@ -51,9 +89,8 @@ const Signup = () => {
           <div className="relative my-3">
             <input
               type="email"
-              required
               name='email'
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={handleChange}
               className='outline-blue-800 border-2 text-black font-mono focus:border-background w-full p-2 rounded-md'
               placeholder="Email"
             />
@@ -65,11 +102,10 @@ const Signup = () => {
           <div className="relative my-3">
             <input
               type="password"
-              required
               minLength={5}
               maxLength={8}
               name='password'
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={handleChange}
               className='outline-blue-800 border-2 text-black font-mono focus:border-background w-full p-2 rounded-md'
               placeholder="Password"
             />
@@ -77,7 +113,6 @@ const Signup = () => {
               <MdLock className="h-4 w-4 text-gray-400" />
             </span>
           </div>
-
 
           <div className="flex items-center justify-center md:justify-start my-3">
             <button
@@ -87,9 +122,7 @@ const Signup = () => {
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Signup;
-
-

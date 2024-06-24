@@ -5,6 +5,8 @@ import Home from './Pages/Home';
 import Login from './Pages/Login';
 import Signup from './Pages/Signup';
 import UpdateProfile from './Pages/UpdateProfile';
+import AddNote from './Pages/AddNote';
+import UpdateNote from './Pages/UpdateNote';
 
 
 function App() {
@@ -16,6 +18,9 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path='/signup' element={<Signup/>}/>
         <Route path='/updateProfile' element={<UpdateProfile/>}/>
+        <Route path='/addnote' element={<AddNote/>}/>
+        <Route path='/updateNote' element={<UpdateNote/>}/>
+
       </Routes>
     </Router>
   );

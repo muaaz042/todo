@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
-import { FaRegUser } from "react-icons/fa";
+import { FaRegUser, FaArrowLeft } from "react-icons/fa";
 import { MdOutlineEmail, MdLock } from "react-icons/md";
 import { FaUser } from "react-icons/fa6";
 import axios from 'axios';
 
-const UpdateProfile = () => {
+const UpdateProfile = ({ note }) => {
     const [userData, setUserData] = useState({
         name: '',
         email: '',
@@ -53,6 +53,7 @@ const UpdateProfile = () => {
             await axios.put('http://localhost:5000/auth/updateUser', userData, {
                 headers: { Authorization: `notes ${localStorage.getItem('token')}` }
             });
+            navigate('/home');
         } catch (error) {
             console.log(error);
         }
@@ -62,12 +63,17 @@ const UpdateProfile = () => {
 
     return (
         <div className='flex justify-center items-center h-[38rem]'>
-            <div className='flex flex-col gap-8 lg:w-1/3 md:w-2/3 w-4/5 mx-5 border-2 border-blue-300 p-5 shadow-xl rounded-2xl'>
-                <div className='flex justify-between sm:justify-center md:justify-between gap-5 items-center px-10'>
+            <div className='flex flex-col gap-8 lg:w-1/3 md:w-2/3 w-4/5 mx-5 border-2 border-blue-300 p-5 shadow-xl rounded-3xl'>
+                <div className='flex justify-between sm:justify-center md:justify-between gap-5 items-center px-10 relative'>
+                    <FaArrowLeft
+                        onClick={() => {
+                            navigate('/home')
+                        }}
+                        className='absolute left-0 text-xl hover:fill-blue-300' />
                     <div className='rounded-full border-2 border-blue-300 hover:bg-blue-300 flex justify-center items-center'>
-                        <FaUser className='text-3xl m-4'/>
+                        <FaUser className='text-3xl m-4' />
                     </div>
-                    <h1 className='lg:text-3xl md:text-2xl text-xl font-mono font-bold border-2 border-black'>Update your profile</h1>
+                    <h1 className='lg:text-2xl md:text-2xl text-lg font-mono font-bold'>Update your profile</h1>
                 </div>
                 <form className="w-full">
                     <div className="relative my-3">
