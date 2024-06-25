@@ -33,14 +33,12 @@ const UpdateNote = () => {
             const res = await axios.put(`http://localhost:5000/note/updateNote/${note._id}`, { title, description }, {
                 headers: { Authorization: `notes ${localStorage.getItem('token')}` }
             });
-            console.log(res.data.note);
 
             if (res.status === 200) {
-                console.log("Note Updated");
                 navigate('/home');
             }
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     };
 

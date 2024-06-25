@@ -7,6 +7,7 @@ import Signup from './Pages/Signup';
 import UpdateProfile from './Pages/UpdateProfile';
 import AddNote from './Pages/AddNote';
 import UpdateNote from './Pages/UpdateNote';
+import About from './Pages/About';
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
     <Router>
       <Navbar/>
       <Routes>
+        <Route path='/' element={<About/>}/>
         <Route path='/home' element={<Home/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/signup' element={<Signup/>}/>

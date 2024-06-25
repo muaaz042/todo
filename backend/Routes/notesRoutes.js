@@ -11,11 +11,9 @@ router.post('/addNote', requireLogin, async (req, res) => {
             title,
             description,
         });
-        console.log(note);
         await note.save();
         return res.status(201).json({ message: 'Note Added Successfully' });
     } catch (error) {
-        console.log(error.message);
         return res.status(500).json({ error: 'Internal Server Error' });
     }
 });
@@ -28,7 +26,6 @@ router.get('/getNotes', requireLogin, async (req, res) => {
         }
         return res.json({ notes });
     } catch (error) {
-        console.log(error.message);
         return res.status(500).json({ error: 'Internal Server Error' });
     }
 });
@@ -51,7 +48,7 @@ router.put("/updateNote/:id", requireLogin, async (req, res) => {
       });
 
     } catch (error) {
-      console.log(error);
+      return res.status(500).json({ error: 'Internal Server Error' });
     }
   });
 
@@ -62,7 +59,7 @@ router.delete("/deleteNote/:id", requireLogin, async (req, res) => {
     res.status(200).json({ message: "Deletion Success" });
       });
     } catch (error) {
-      console.log(error);
+      return res.status(500).json({ error: 'Internal Server Error' });
     }
   });
 

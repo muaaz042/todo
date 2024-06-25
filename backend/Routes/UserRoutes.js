@@ -23,7 +23,6 @@ router.post('/register', async (req, res) => {
       await user.save();
       return res.status(201).json({ message: 'User registered Successfully' });
     } catch (error) {
-      console.log(error.message);
       res.status(500).json({ error: 'Internal server error' });
     }
   });
@@ -44,7 +43,7 @@ router.post('/login', async (req, res) => {
         return res.json({token});
 
     } catch (error) {
-        console.log(error.message);
+      res.status(500).json({ error: 'Internal server error' });
     }
 });
 
@@ -70,7 +69,7 @@ router.put("/updateUser", requireLogin, async (req, res) => {
       });
 
     } catch (error) {
-      console.log(error);
+      res.status(500).json({ error: 'Internal server error' });
     }
   });
 
@@ -80,7 +79,7 @@ router.get('/', requireLogin, async (req, res) =>{
         const user = await userSchema.findById(req.user._id).select("-password -plainTextPassword");
         res.json(user);
     } catch (error) {
-        console.log(error.message);
+      res.status(500).json({ error: 'Internal server error' });
     }
 })
 
@@ -89,7 +88,7 @@ router.get('/getUser', requireLogin, async (req, res) =>{
         const user = await userSchema.findById(req.user._id).select("-password");
         res.json(user);
     } catch (error) {
-        console.log(error.message);
+      res.status(500).json({ error: 'Internal server error' });
     }
 })
 

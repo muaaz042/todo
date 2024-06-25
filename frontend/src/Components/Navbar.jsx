@@ -8,6 +8,7 @@ const Navbar = () => {
   const [isMenu, setMenu] = useState(false);
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+  const [logoRoute, setLogoRoute] = useState('/');
 
   const getUser = async () => {
     try {
@@ -19,7 +20,6 @@ const Navbar = () => {
         headers: { Authorization: `notes ${token}` }
       });
       setUser(res.data);
-      console.log('User fetched:', res.data);
     } catch (error) {
       console.error('Error fetching user:', error);
     }
@@ -28,20 +28,21 @@ const Navbar = () => {
   useEffect(() => {
     if (localStorage.getItem('token')) {
       getUser();
+      setLogoRoute('/home');
     }
   }, [navigate]);
 
   const logOut = () => {
     localStorage.removeItem('token');
     setUser(null);
-    navigate('/login');
+    navigate('/');
     setMenu(false);
   };
 
   return (
-    <div className='flex justify-between items-center border border-black w-full px-10'>
+    <div className='flex justify-between items-center w-full px-10 shadow-lg'>
       <section className='flex items-center gap-4'>
-        <Link to={"/home"}>
+        <Link to={logoRoute}>
           <img className='h-12 w-36 m-5' src="./src/assets/logo.png" alt="logo" />
         </Link>
       </section>

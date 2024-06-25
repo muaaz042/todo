@@ -22,8 +22,6 @@ const UpdateProfile = ({ note }) => {
             const res = await axios.get("http://localhost:5000/auth/getUser", {
                 headers: { Authorization: `notes ${token}` }
             });
-
-            console.log('User fetched:', res.data);
             setUserData(res.data);
         } catch (error) {
             console.error('Error fetching user:', error);
@@ -49,13 +47,12 @@ const UpdateProfile = ({ note }) => {
     const handleUpdate = async (e) => {
         e.preventDefault();
         try {
-            console.log(userData);
             await axios.put('http://localhost:5000/auth/updateUser', userData, {
                 headers: { Authorization: `notes ${localStorage.getItem('token')}` }
             });
             navigate('/home');
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
 
 

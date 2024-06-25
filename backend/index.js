@@ -6,7 +6,7 @@ app.use(cors());
 
 require('./Connection/Connection');
 
-app.use('/auth', require('./Routes/userRoutes'));
+app.use('/auth', require('./Routes/UserRoutes'));
 app.use('/note', require('./Routes/notesRoutes'));
 
 app.listen(5000, () => {
