@@ -17,7 +17,7 @@ const Navbar = () => {
       if (!token) {
         return;
       }
-      const res = await axios.get("https://todo-backend-gilt.vercel.app/auth", {
+      const res = await axios.get("https://localhost:5000/auth", {
         headers: { Authorization: `notes ${token}` }
       });
       setUser(res.data);

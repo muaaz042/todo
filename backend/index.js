@@ -2,11 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 app.use(express.json());
-app.use(cors({
-    origin:["https://todo-notes-nine.vercel.app"],
-    methods:["POST", "GET", "PUT", "DELETE"],
-    credentials:true
-}));
+app.use(cors());
 
 require('./Connection/Connection');
 

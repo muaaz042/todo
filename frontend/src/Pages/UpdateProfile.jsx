@@ -20,7 +20,7 @@ const UpdateProfile = () => {
             if (!token) {
                 return;
             }
-            const res = await axios.get("https://todo-backend-gilt.vercel.app/auth/getUser", {
+            const res = await axios.get("https://localhost:5000/auth/getUser", {
                 headers: { Authorization: `notes ${token}` }
             });
             setUserData(res.data);
