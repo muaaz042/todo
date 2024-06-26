@@ -5,6 +5,7 @@ import { MdOutlineEmail, MdLock } from "react-icons/md";
 import axios from 'axios';
 
 const Signup = () => {
+  axios.defaults.withCredentials = true;
   const navigate = useNavigate();
   const [data, setData] = useState({
     name: "",
@@ -39,7 +40,7 @@ const Signup = () => {
     }
     try {
       setData({ ...data, error: null });
-      await axios.post("http://localhost:5000/auth/register", { name, email, password }, config);
+      await axios.post("https://todo-backend-gilt.vercel.app/auth/register", { name, email, password }, config);
       navigate('/login');
       setData({ ...data, name: '', email: '', password: '' });
     } catch (err) {

@@ -9,6 +9,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [logoRoute, setLogoRoute] = useState('/');
+  axios.defaults.withCredentials = true;
 
   const getUser = async () => {
     try {
@@ -16,7 +17,7 @@ const Navbar = () => {
       if (!token) {
         return;
       }
-      const res = await axios.get("http://localhost:5000/auth", {
+      const res = await axios.get("https://todo-backend-gilt.vercel.app/auth", {
         headers: { Authorization: `notes ${token}` }
       });
       setUser(res.data);

@@ -9,6 +9,7 @@ const Home = () => {
   const [notes, setNotes] = useState([]);
   const [filteredNotes, setFilteredNotes] = useState([]);
   const navigate = useNavigate();
+  axios.defaults.withCredentials = true;
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -19,7 +20,7 @@ const Home = () => {
 
     const fetchNotes = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/note/getNotes', {
+        const res = await axios.get('https://todo-backend-gilt.vercel.app/note/getNotes', {
           headers: { Authorization: `notes ${localStorage.getItem('token')}` }
         });
         if (Array.isArray(res.data.notes)) {

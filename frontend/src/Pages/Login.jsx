@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { MdOutlineEmail, MdLock } from "react-icons/md";
 import {Link, useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
 import axios from 'axios';
 
 const Login = () => {
+  axios.defaults.withCredentials = true;
   const navigate = useNavigate();
   const [data, setData] = useState({
     email: "",
@@ -35,7 +35,7 @@ const Login = () => {
     }
     try {
       setData({ ...data, error: null });
-      const res = await axios.post('http://localhost:5000/auth/login', { email, password }, config);
+      const res = await axios.post('https://todo-backend-gilt.vercel.app/auth/login', { email, password }, config);
       localStorage.setItem('token', res.data.token);
       navigate("/home");
       setData({ ...data, email: '', password: '' });

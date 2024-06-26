@@ -5,11 +5,12 @@ import { useNavigate } from 'react-router-dom';
 
 const NoteCard = ({ index, bgColor, note, onDelete }) => {
   const navigate = useNavigate();
+  axios.defaults.withCredentials = true;
 
   const handleDelete = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.delete(`http://localhost:5000/note/deleteNote/${note._id}`, {
+      const res = await axios.delete(`https://todo-backend-gilt.vercel.app/note/deleteNote/${note._id}`, {
         headers: { Authorization: `notes ${localStorage.getItem('token')}` }
       });
       console.log(res.data.note);

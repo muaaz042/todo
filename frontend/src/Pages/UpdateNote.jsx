@@ -7,6 +7,7 @@ import axios from 'axios';
 const UpdateNote = () => {
     const navigate = useNavigate();
     const location = useLocation();
+    axios.defaults.withCredentials = true;
     const note = location.state ? location.state.note : null;
 
     const [title, setTitle] = useState('');
@@ -30,7 +31,7 @@ const UpdateNote = () => {
     const handleUpdate = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.put(`http://localhost:5000/note/updateNote/${note._id}`, { title, description }, {
+            const res = await axios.put(`https://todo-backend-gilt.vercel.app/note/updateNote/${note._id}`, { title, description }, {
                 headers: { Authorization: `notes ${localStorage.getItem('token')}` }
             });
 

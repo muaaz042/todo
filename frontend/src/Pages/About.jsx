@@ -49,7 +49,7 @@ const About = () => {
                         ></animate>
                     </path>
                 </svg>
-                <img src="./src/assets/logo2.png" alt="" className="absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] xl:h-72 xl:w-80 lg:h-64 lg:w-64 md:h-48 md:w-48 sm:h-64 h-36"/>
+                <img src="../frontend/src/assets/logo2.png" alt="" className="absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] xl:h-72 xl:w-80 lg:h-64 lg:w-64 md:h-48 md:w-48 sm:h-64 h-36"/>
             </div>
             
         </div>

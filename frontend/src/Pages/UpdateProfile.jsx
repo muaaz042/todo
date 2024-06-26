@@ -5,7 +5,8 @@ import { MdOutlineEmail, MdLock } from "react-icons/md";
 import { FaUser } from "react-icons/fa6";
 import axios from 'axios';
 
-const UpdateProfile = ({ note }) => {
+const UpdateProfile = () => {
+    axios.defaults.withCredentials = true;
     const [userData, setUserData] = useState({
         name: '',
         email: '',
@@ -19,7 +20,7 @@ const UpdateProfile = ({ note }) => {
             if (!token) {
                 return;
             }
-            const res = await axios.get("http://localhost:5000/auth/getUser", {
+            const res = await axios.get("https://todo-backend-gilt.vercel.app/auth/getUser", {
                 headers: { Authorization: `notes ${token}` }
             });
             setUserData(res.data);
