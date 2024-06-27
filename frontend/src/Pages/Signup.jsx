@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link,useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaRegUser } from "react-icons/fa";
 import { MdOutlineEmail, MdLock } from "react-icons/md";
 import axios from 'axios';
@@ -17,7 +17,8 @@ const Signup = () => {
   const { name, email, password, error } = data;
 
   const config = {
-    headers: { "Content-Type": "application/json" }
+    headers: { "Content-Type": "application/json" },
+    withCredentials: true
   };
 
   const handleRegister = async (e) => {
@@ -40,7 +41,7 @@ const Signup = () => {
     }
     try {
       setData({ ...data, error: null });
-      await axios.post("http://localhost:5000/auth/register", { name, email, password }, config);
+      await axios.post("https://todo-backend-api-chi.vercel.app/auth/register", { name, email, password }, config);
       setData({ ...data, name: '', email: '', password: '' });
       navigate('/login');
     } catch (err) {

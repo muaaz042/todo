@@ -5,7 +5,7 @@ import axios from 'axios';
 
 const Login = () => {
   const navigate = useNavigate();
-  
+
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -15,7 +15,8 @@ const Login = () => {
   const { email, password, error } = data;
 
   const config = {
-    headers: { "Content-Type": "application/json" }
+    headers: { "Content-Type": "application/json" },
+    withCredentials: true
   };
 
   const handleLogin = async (e) => {
@@ -34,7 +35,7 @@ const Login = () => {
     }
     try {
       setData({ ...data, error: null });
-      const res = await axios.post('http://localhost:5000/auth/login', { email, password }, config);
+      const res = await axios.post('https://todo-backend-api-chi.vercel.app/auth/login', { email, password }, config);
       localStorage.setItem('token', res.data.token);
       setData({ ...data, email: '', password: '' });
       navigate("/home");
