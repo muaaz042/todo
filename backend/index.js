@@ -13,8 +13,6 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 
-app.get('/',(req, res) => res.status(200).json({message: "App Deployed"}));
-
 app.use('/auth', require('./Routes/UserRoutes'));
 app.use('/note', require('./Routes/notesRoutes'));
 
