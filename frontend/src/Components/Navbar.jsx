@@ -17,7 +17,7 @@ const Navbar = () => {
       if (!token) {
         return;
       }
-      const res = await axios.get("http://localhost:5000/auth", {
+      const res = await axios.get("https://todo-backend-eight-neon.vercel.app/auth", {
         headers: { Authorization: `notes ${token}` }
       });
       setUser(res.data);

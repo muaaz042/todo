@@ -28,7 +28,7 @@ const Home = () => {
 
     const fetchNotes = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/note/getNotes', config);
+        const res = await axios.get('https://todo-backend-eight-neon.vercel.app/note/getNotes', config);
         console.log(res.data.note);
         if (Array.isArray(res.data.note)) {
           setNotes(res.data.note);

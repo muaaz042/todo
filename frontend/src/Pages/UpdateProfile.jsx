@@ -20,7 +20,7 @@ const UpdateProfile = () => {
             if (!token) {
                 return;
             }
-            const res = await axios.get("http://localhost:5000/auth/getUser", {
+            const res = await axios.get("https://todo-backend-eight-neon.vercel.app/auth/getUser", {
                 headers: { Authorization: `notes ${token}` }
             });
             setUserData(res.data);
@@ -48,7 +48,7 @@ const UpdateProfile = () => {
     const handleUpdate = async (e) => {
         e.preventDefault();
         try {
-            await axios.put('http://localhost:5000/auth/updateUser', userData, {
+            await axios.put('https://todo-backend-eight-neon.vercel.app/auth/updateUser', userData, {
                 headers: { Authorization: `notes ${localStorage.getItem('token')}` }
             });
             navigate('/home');
