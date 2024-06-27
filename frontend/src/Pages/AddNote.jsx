@@ -24,7 +24,7 @@ const AddNote = () => {
     const handleAdd = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post('https://localhost:5000/note/addNote', { title, description }, {
+            const res = await axios.post('http://localhost:5000/note/addNote', { title, description }, {
                 headers: { Authorization: `notes ${localStorage.getItem('token')}` }
             });
             navigate('/home');

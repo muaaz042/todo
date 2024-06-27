@@ -31,7 +31,7 @@ const UpdateNote = () => {
     const handleUpdate = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.put(`https://localhost:5000/note/updateNote/${note._id}`, { title, description }, {
+            const res = await axios.put(`http://localhost:5000/note/updateNote/${note._id}`, { title, description }, {
                 headers: { Authorization: `notes ${localStorage.getItem('token')}` }
             });
 

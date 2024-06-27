@@ -17,7 +17,7 @@ const Navbar = () => {
       if (!token) {
         return;
       }
-      const res = await axios.get("https://localhost:5000/auth", {
+      const res = await axios.get("http://localhost:5000/auth", {
         headers: { Authorization: `notes ${token}` }
       });
       setUser(res.data);
@@ -44,7 +44,7 @@ const Navbar = () => {
     <div className='flex justify-between items-center w-full px-10 shadow-lg'>
       <section className='flex items-center gap-4'>
         <Link to={logoRoute}>
-          <img className='h-12 w-36 m-5' src="./src/assets/logo.png" alt="logo" />
+          <img className='h-12 w-36 m-5' src="./logo.svg" alt="logo" />
         </Link>
       </section>
       <FiMenu

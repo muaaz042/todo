@@ -9,7 +9,6 @@ const Home = () => {
   const [notes, setNotes] = useState([]);
   const [filteredNotes, setFilteredNotes] = useState([]);
   const navigate = useNavigate();
-  axios.defaults.withCredentials = true;
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -18,14 +17,22 @@ const Home = () => {
       return;
     }
 
+    const config = {
+      headers: { 
+          "Content-Type": "application/json",
+          "Authorization": `notes ${token}`
+      },
+      withCredentials: true
+  };
+
+
     const fetchNotes = async () => {
       try {
-        const res = await axios.get('https://localhost:5000/note/getNotes', {
-          headers: { Authorization: `notes ${localStorage.getItem('token')}` }
-        });
-        if (Array.isArray(res.data.notes)) {
-          setNotes(res.data.notes);
-          setFilteredNotes(res.data.notes);
+        const res = await axios.get('http://localhost:5000/note/getNotes', config);
+        console.log(res.data.note);
+        if (Array.isArray(res.data.note)) {
+          setNotes(res.data.note);
+          setFilteredNotes(res.data.note);
         } else {
           console.error('Unexpected response format:', res.data);
         }

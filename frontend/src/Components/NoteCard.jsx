@@ -10,7 +10,7 @@ const NoteCard = ({ index, bgColor, note, onDelete }) => {
   const handleDelete = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.delete(`https://localhost:5000/note/deleteNote/${note._id}`, {
+      const res = await axios.delete(`http://localhost:5000/note/deleteNote/${note._id}`, {
         headers: { Authorization: `notes ${localStorage.getItem('token')}` }
       });
       console.log(res.data.note);
