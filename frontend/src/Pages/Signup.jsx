@@ -18,7 +18,7 @@ const Signup = () => {
 
   const config = {
     headers: { "Content-Type": "application/json" },
-    withCredentials: true
+    withCredentials: true,
   };
 
   const handleRegister = async (e) => {

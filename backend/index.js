@@ -18,6 +18,6 @@ app.get('/',(req, res) => res.status(200).json({message: "App Deployed"}));
 app.use('/auth', require('./Routes/UserRoutes'));
 app.use('/note', require('./Routes/notesRoutes'));
 
-app.listen(5000, () => {
+app.listen(5174, () => {
   console.log('App is running');
 });
