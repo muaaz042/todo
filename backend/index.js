@@ -4,10 +4,12 @@ const cors = require('cors');
 app.use(express.json());
 require('./Connection/Connection');
 
-app.use(cors({
+const corsOptions = {
   origin: 'https://keep-your-notes.vercel.app',
-  credentials: true
-}));
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
 
 
 app.get('/',(req, res) => res.status(200).json({message: "App Deployed"}));
