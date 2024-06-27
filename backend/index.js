@@ -7,7 +7,7 @@ const port = process.env.PORT || 5174;
 require("./Connection/Connection.js");
 
 const corsOptions = {
-  origin: ["https://keep-your-notes.vercel.app", "http://localhost:5173"],
+  origin: ["https://todo-app-mern-xi.vercel.app", "http://localhost:5173"],
   optionsSuccessStatus: 200,
   credentials: true,
 };
@@ -16,6 +16,10 @@ app.use(cors(corsOptions));
 
 app.use("/auth", require("./Routes/UserRoutes"));
 app.use("/note", require("./Routes/notesRoutes"));
+
+app.use("/", (req, res) => {
+  res.send("Server is running.");
+});
 
 app.listen(port, () => {
   console.log(`App is running on ${port}`);
