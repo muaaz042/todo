@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 app.use(express.json());
-require('./Connection/Connection');
+require('./Connection/Connection.js');
 
 const corsOptions = {
   origin: 'https://keep-your-notes.vercel.app',

@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const notesSchema = require('../Models/notesModel');
-const { requireLogin } = require('../middleware/auth');
+const notesSchema = require('../Models/notesModel.js');
+const { requireLogin } = require('../middleware/auth.js');
 
 router.post('/addNote', requireLogin, async (req, res) => {
     const { title, description } = req.body;
