@@ -5,7 +5,7 @@ app.use(express.json());
 require('./Connection/Connection');
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://keep-your-notes.vercel.app',
     credentials: true
   }));
 
