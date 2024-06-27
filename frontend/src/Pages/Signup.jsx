@@ -41,7 +41,7 @@ const Signup = () => {
     }
     try {
       setData({ ...data, error: null });
-      await axios.post("https://todo-backend-api-chi.vercel.app/auth/register", { name, email, password }, config);
+      await axios.post("http://localhost:5000/auth/register", { name, email, password }, config);
       setData({ ...data, name: '', email: '', password: '' });
       navigate('/login');
     } catch (err) {
