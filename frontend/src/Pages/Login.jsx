@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { MdOutlineEmail, MdLock } from "react-icons/md";
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { BACKEND_URL } from "../../constants";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -9,14 +10,14 @@ const Login = () => {
   const [data, setData] = useState({
     email: "",
     password: "",
-    error: null
+    error: null,
   });
 
   const { email, password, error } = data;
 
   const config = {
     headers: { "Content-Type": "application/json" },
-    withCredentials: true
+    withCredentials: true,
   };
 
   const handleLogin = async (e) => {
@@ -35,12 +36,19 @@ const Login = () => {
     }
     try {
       setData({ ...data, error: null });
-      const res = await axios.post('https://todo-backend-eight-neon.vercel.app/auth/login', { email, password }, config);
-      localStorage.setItem('token', res.data.token);
-      setData({ ...data, email: '', password: '' });
+      const res = await axios.post(
+        `${BACKEND_URL}/auth/login`,
+        { email, password },
+        config
+      );
+      localStorage.setItem("token", res.data.token);
+      setData({ ...data, email: "", password: "" });
       navigate("/home");
     } catch (err) {
-      setData({ ...data, error: err.response?.data?.error || 'Something went wrong' });
+      setData({
+        ...data,
+        error: err.response?.data?.error || "Something went wrong",
+      });
     }
   };
 
@@ -64,14 +72,8 @@ const Login = () => {
         >
           <defs>
             <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop
-                offset="0%"
-                style={{ stopColor: "rgb(0, 0, 0)" }}
-              ></stop>
-              <stop
-                offset="100%"
-                style={{ stopColor: "rgb(0, 0, 0)" }}
-              ></stop>
+              <stop offset="0%" style={{ stopColor: "rgb(0, 0, 0)" }}></stop>
+              <stop offset="100%" style={{ stopColor: "rgb(0, 0, 0)" }}></stop>
             </linearGradient>
           </defs>
           <path id="blob" fill="url(#gradient)" style={{ opacity: 1 }}>
@@ -90,26 +92,30 @@ const Login = () => {
             ></animate>
           </path>
         </svg>
-        <img src="./logo2.svg" alt="" className="absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] xl:h-72 xl:w-80 lg:h-64 lg:w-64 md:h-48 md:w-48 sm:h-64 h-36" />
+        <img
+          src="./logo2.svg"
+          alt=""
+          className="absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] xl:h-72 xl:w-80 lg:h-64 lg:w-64 md:h-48 md:w-48 sm:h-64 h-36"
+        />
       </div>
 
-      <div className="w-full flex flex-col justify-center pb-20 md:pb-12" >
-        <div className='flex items-center justify-between flex-wrap gap-3 px-7 my-7'>
-          <img src="./logo.svg" alt="" className='w-48' />
-          <h1 className='text-5xl text-blue-400'>
-            <span className='text-blue-800'>Login </span>
+      <div className="w-full flex flex-col justify-center pb-20 md:pb-12">
+        <div className="flex items-center justify-between flex-wrap gap-3 px-7 my-7">
+          <img src="./logo.svg" alt="" className="w-48" />
+          <h1 className="text-5xl text-blue-400">
+            <span className="text-blue-800">Login </span>
             Here!
           </h1>
         </div>
 
         <form className="px-16">
-          {error ? <p className=' text-red-500'>{error}</p> : null}
+          {error ? <p className=" text-red-500">{error}</p> : null}
           <div className="relative my-3">
             <input
               type="email"
-              name='email'
+              name="email"
               onChange={handleChange}
-              className='outline-blue-800 border-2 text-black font-mono focus:border-background w-full p-2 rounded-md'
+              className="outline-blue-800 border-2 text-black font-mono focus:border-background w-full p-2 rounded-md"
               placeholder="Email"
             />
             <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
@@ -122,9 +128,9 @@ const Login = () => {
               type="password"
               minLength={5}
               maxLength={8}
-              name='password'
+              name="password"
               onChange={handleChange}
-              className='outline-blue-800 border-2 text-black font-mono focus:border-background w-full p-2 rounded-md'
+              className="outline-blue-800 border-2 text-black font-mono focus:border-background w-full p-2 rounded-md"
               placeholder="Password"
             />
             <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
@@ -135,9 +141,17 @@ const Login = () => {
           <div className="flex items-center justify-center md:justify-start my-3">
             <button
               onClick={handleLogin}
-              className="text-center font-medium border-blue-400 text-blue-400 cursor-pointer hover:bg-blue-400 hover:text-white outline-none border-2 w-full p-2 rounded-md">Login</button>
+              className="text-center font-medium border-blue-400 text-blue-400 cursor-pointer hover:bg-blue-400 hover:text-white outline-none border-2 w-full p-2 rounded-md"
+            >
+              Login
+            </button>
           </div>
-          <p className='text-black'>Don't have an account <Link className='text-blue-400 underline' to='/signup'>register</Link></p>
+          <p className="text-black">
+            Don't have an account{" "}
+            <Link className="text-blue-400 underline" to="/signup">
+              register
+            </Link>
+          </p>
         </form>
       </div>
     </div>

@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+/* eslint-disable no-unused-vars */
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { FaRegUser } from "react-icons/fa";
 import { MdOutlineEmail, MdLock } from "react-icons/md";
-import axios from 'axios';
+import axios from "axios";
+import { BACKEND_URL } from "../../constants";
 
 const Signup = () => {
   axios.defaults.withCredentials = true;
@@ -11,7 +13,7 @@ const Signup = () => {
     name: "",
     email: "",
     password: "",
-    error: null
+    error: null,
   });
 
   const { name, email, password, error } = data;
@@ -25,25 +27,29 @@ const Signup = () => {
     e.preventDefault();
     if (!name) {
       setData({ ...data, error: "Name is required" });
-      return
+      return;
     }
     if (!email) {
       setData({ ...data, error: "Email is required" });
-      return
+      return;
     }
     if (!password) {
       setData({ ...data, error: "Password is required" });
-      return
+      return;
     }
     if (password.length < 5 || password.length > 8) {
       setData({ ...data, error: "Password must be 5 - 8 characters" });
-      return
+      return;
     }
     try {
       setData({ ...data, error: null });
-      await axios.post("https://todo-backend-eight-neon.vercel.app/auth/register", { name, email, password }, config);
-      setData({ ...data, name: '', email: '', password: '' });
-      navigate('/login');
+      await axios.post(
+        `${BACKEND_URL}/auth/register`, // backend url replaced with the variable. Actual variable is in constants folder's index file.
+        { name, email, password },
+        config
+      );
+      setData({ ...data, name: "", email: "", password: "" });
+      navigate("/login");
     } catch (err) {
       setData({ ...data, error: err.response.data.error });
     }
@@ -69,14 +75,8 @@ const Signup = () => {
         >
           <defs>
             <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop
-                offset="0%"
-                style={{ stopColor: "rgb(0, 0, 0)" }}
-              ></stop>
-              <stop
-                offset="100%"
-                style={{ stopColor: "rgb(0, 0, 0)" }}
-              ></stop>
+              <stop offset="0%" style={{ stopColor: "rgb(0, 0, 0)" }}></stop>
+              <stop offset="100%" style={{ stopColor: "rgb(0, 0, 0)" }}></stop>
             </linearGradient>
           </defs>
           <path id="blob" fill="url(#gradient)" style={{ opacity: 1 }}>
@@ -95,26 +95,30 @@ const Signup = () => {
             ></animate>
           </path>
         </svg>
-        <img src="./logo2.svg" alt="" className="absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] xl:h-72 xl:w-80 lg:h-64 lg:w-64 md:h-48 md:w-48 sm:h-64 h-36" />
+        <img
+          src="./logo2.svg"
+          alt=""
+          className="absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] xl:h-72 xl:w-80 lg:h-64 lg:w-64 md:h-48 md:w-48 sm:h-64 h-36"
+        />
       </div>
 
       <div className="w-full flex flex-col justify-center pb-20 md:pb-12">
-        <div className='flex items-center justify-between flex-wrap gap-3 px-7 my-7'>
-          <img src="./logo.svg" alt="" className='w-48' />
-          <h1 className='text-5xl text-blue-400'>
-            <span className='text-blue-800'>Signup </span>
+        <div className="flex items-center justify-between flex-wrap gap-3 px-7 my-7">
+          <img src="./logo.svg" alt="" className="w-48" />
+          <h1 className="text-5xl text-blue-400">
+            <span className="text-blue-800">Signup </span>
             Here!
           </h1>
         </div>
 
         <form className="px-16">
-          {error ? <p className=' text-red-500'>{error}</p> : null}
+          {error ? <p className=" text-red-500">{error}</p> : null}
           <div className="relative my-3">
             <input
               type="text"
-              name='name'
+              name="name"
               onChange={handleChange}
-              className='outline-blue-800 border-2 text-black font-mono focus:border-background w-full p-2 rounded-md'
+              className="outline-blue-800 border-2 text-black font-mono focus:border-background w-full p-2 rounded-md"
               placeholder="Full name"
             />
             <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
@@ -125,9 +129,9 @@ const Signup = () => {
           <div className="relative my-3">
             <input
               type="email"
-              name='email'
+              name="email"
               onChange={handleChange}
-              className='outline-blue-800 border-2 text-black font-mono focus:border-background w-full p-2 rounded-md'
+              className="outline-blue-800 border-2 text-black font-mono focus:border-background w-full p-2 rounded-md"
               placeholder="Email"
             />
             <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
@@ -140,9 +144,9 @@ const Signup = () => {
               type="password"
               minLength={5}
               maxLength={8}
-              name='password'
+              name="password"
               onChange={handleChange}
-              className='outline-blue-800 border-2 text-black font-mono focus:border-background w-full p-2 rounded-md'
+              className="outline-blue-800 border-2 text-black font-mono focus:border-background w-full p-2 rounded-md"
               placeholder="Password"
             />
             <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
@@ -153,9 +157,17 @@ const Signup = () => {
           <div className="flex items-center justify-center md:justify-start my-3">
             <button
               onClick={handleRegister}
-              className="text-center font-medium border-blue-400 text-blue-400 cursor-pointer hover:bg-blue-400 hover:text-white outline-none border-2 w-full p-2 rounded-md">Signup</button>
+              className="text-center font-medium border-blue-400 text-blue-400 cursor-pointer hover:bg-blue-400 hover:text-white outline-none border-2 w-full p-2 rounded-md"
+            >
+              Signup
+            </button>
           </div>
-          <p className='text-black'>Already have an account <Link className='text-blue-400 underline' to='/login'>Log In</Link></p>
+          <p className="text-black">
+            Already have an account{" "}
+            <Link className="text-blue-400 underline" to="/login">
+              Log In
+            </Link>
+          </p>
         </form>
       </div>
     </div>
