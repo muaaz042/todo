@@ -6,7 +6,8 @@ require('./Connection/Connection');
 
 const corsOptions = {
   origin: 'https://keep-your-notes.vercel.app',
-  optionsSuccessStatus: 200
+  optionsSuccessStatus: 200,
+  credentials: true
 };
 
 app.use(cors(corsOptions));
