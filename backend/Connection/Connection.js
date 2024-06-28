@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 const connectionString = process.env.DATABASE_URL;
 
-// "mongodb+srv://muaaz042:$Muaaz042@cluster0.uzavflp.mongodb.net/todo?retryWrites=true&w=majority&appName=Cluster0"
-
 mongoose
   .connect(connectionString)
   .then(() => {

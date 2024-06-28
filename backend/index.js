@@ -7,7 +7,7 @@ const port = process.env.PORT || 5174;
 require("./Connection/Connection.js");
 
 const corsOptions = {
-  origin: ["https://todo-app-mern-xi.vercel.app", "http://localhost:5173"],
+  origin: ["https://keep-your-notes.vercel.app", "http://localhost:5173"],
   optionsSuccessStatus: 200,
   credentials: true,
 };
