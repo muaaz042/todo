@@ -1,6 +1,18 @@
-import React from 'react'
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const About = () => {
+    const navigate = useNavigate();
+    
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (token) {
+          navigate("/home");
+          return;
+        }});
+
+
     return (
         <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 h-[42rem]'>
             <div className='flex flex-col justify-center font-mono xl:p-8 lg:p-8 md:p-5 sm:p-5 p-4 xl:border-r-4 lg:border-r-4 md:border-r-4 
