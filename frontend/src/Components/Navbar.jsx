@@ -42,10 +42,10 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex justify-between items-center w-full px-10 shadow-lg">
+    <div className="flex justify-between items-center w-full lg:px-10 md:px-10 sm:px-8 px-4 shadow-lg">
       <section className="flex items-center gap-4">
         <Link to={logoRoute}>
-          <img className="h-12 w-36 m-5" src="./logo.svg" alt="logo" />
+          <img className="h-12 w-36 my-5" src="./logo.svg" alt="logo" />
         </Link>
       </section>
       <FiMenu
@@ -126,7 +126,7 @@ const Navbar = () => {
                   navigate("/login");
                   setMenu(false);
                 }}
-                className="text-center font-medium border-blue-400 text-blue-400 cursor-pointer hover:bg-blue-400 hover:text-white outline-none border-2 self-center w-80 p-2 rounded-md"
+                className="text-center font-medium border-blue-400 text-blue-400 cursor-pointer hover:bg-blue-400 hover:text-white outline-none border-2 self-center w-64 p-2 rounded-md"
               >
                 Login
               </button>
@@ -135,7 +135,7 @@ const Navbar = () => {
                   navigate("/signup");
                   setMenu(false);
                 }}
-                className="text-center font-medium border-blue-400 text-blue-400 cursor-pointer hover:bg-blue-400 hover:text-white outline-none border-2 self-center w-80 p-2 rounded-md"
+                className="text-center font-medium border-blue-400 text-blue-400 cursor-pointer hover:bg-blue-400 hover:text-white outline-none border-2 self-center w-64 p-2 rounded-md"
               >
                 Signup
               </button>
