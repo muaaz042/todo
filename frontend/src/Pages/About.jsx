@@ -14,7 +14,7 @@ const About = () => {
     }, [navigate]);
 
     return (
-        <div className="grid grid-cols-1 gap-32 py-28 lg:px-40 md:px-24 sm:px-12 px-5 border-2 border-red-600">
+        <div className="grid grid-cols-1 gap-32 py-28 lg:px-40 md:px-24 sm:px-12 px-5">
             {data.map((d, i) => (
                 <Card
                     key={i}
